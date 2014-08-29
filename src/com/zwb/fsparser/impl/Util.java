@@ -13,7 +13,7 @@ public class Util
 		{
 			return false;			
 		}
-		if(!folderName.contains(Config.separator))
+		if(!folderName.contains(Config.SEPARATOR))
 		{
 			return false;
 		}
@@ -74,7 +74,7 @@ public class Util
 		List<File> filesToWork = new ArrayList<File>();
 		List<File> resultFiles = new ArrayList<File>();
 		filesToWork.add(rootFolder);
-		for(int i=-1; i<depth; i++)
+		for(int i=0; i<depth; i++)
 		{
 			resultFiles.clear();
 			for(File f: filesToWork)

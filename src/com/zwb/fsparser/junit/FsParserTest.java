@@ -18,11 +18,11 @@ import com.zwb.fsparser.impl.Util;
 
 public class FsParserTest extends TestCase
 {
-	String root = "c:\\zwb\\geekOlogy\\bsp";
+	String root = "TestData";
 	
 	public void testDeepening()
 	{
-		List<Integer> expected = Arrays.asList(4, 12, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+		List<Integer> expected = Arrays.asList(0, 4, 16, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		for(int i=0; i<10; i++)
 		{
 			int depth = i;
@@ -41,7 +41,7 @@ public class FsParserTest extends TestCase
 	public void testParser0()
 	{
 		IGkFsParser parser = new GkFsParser();
-		List<Integer> expected = Arrays.asList(4, 12, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+		List<Integer> expected = Arrays.asList(0, 4, 16, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 		for(int i=0; i<10; i++)
 		{
 			int depth = i;
@@ -77,7 +77,23 @@ public class FsParserTest extends TestCase
 			System.out.println("* <"+e.getFilename()+">: <"+e.getArtistName()+">/<"+e.getReleaseName()+">");
 		}
 		System.out.println("\n");			
-		assertEquals(28, entries.size());
+		assertEquals(32, entries.size());
+	}	
+
+	public void testDirect()
+	{
+		IGkFsParser parser = new GkFsParser();
+		int expected = 1;
+		IGkFsParserSearchLocation query = new GkFsParserSearchLocation("<name>", root+"/Foo, album1", 0);
+		IGkFsParserResult result = parser.parseFolders(query);
+		List<IGkFsEntry> entries = result.getEntries();
+		System.out.println("Leaves of <"+root+"/Foo, album1"+"> with depth <"+0+">: SIZE==<"+entries.size()+">");
+		for(IGkFsEntry e: entries)
+		{
+			System.out.println("* <"+e.getFilename()+">: <"+e.getArtistName()+">/<"+e.getReleaseName()+">");
+		}
+		System.out.println("\n");			
+		assertEquals(expected, entries.size());
 	}	
 
 }

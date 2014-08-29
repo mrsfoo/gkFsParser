@@ -50,7 +50,7 @@ public class GkFsEntry implements IGkFsEntry
 		{
 			throw new GkFsParserRuntimeExceptionIllegalFolderName("illegal folder name: "+fn);
 		}
-		return fn.substring(0, fn.indexOf(Config.separator)).trim();
+		return fn.substring(0, fn.indexOf(Config.SEPARATOR)).trim();
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class GkFsEntry implements IGkFsEntry
 		{
 			throw new GkFsParserRuntimeExceptionIllegalFolderName("illegal folder name: "+fn);
 		}
-		return fn.substring(fn.indexOf(Config.separator)+1, fn.length()).trim();
+		return fn.substring(fn.indexOf(Config.SEPARATOR)+1, fn.length()).trim();
 	}
 
 	@Override
@@ -88,6 +88,12 @@ public class GkFsEntry implements IGkFsEntry
 	public int hashCode()
 	{
 		return this.getPath().hashCode();
+	}
+
+	@Override
+	public boolean isSampler() 
+	{
+		return this.getArtistName().equals(Config.SAMPLER_STARTER);
 	}
 
 }
