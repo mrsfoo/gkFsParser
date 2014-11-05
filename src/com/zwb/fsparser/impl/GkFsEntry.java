@@ -5,10 +5,17 @@ import java.text.StringCharacterIterator;
 
 import com.zwb.fsparser.api.IGkFsEntry;
 import com.zwb.fsparser.exception.GkFsParserRuntimeExceptionIllegalFolderName;
+import com.zwb.geekology.parser.impl.GkParserQueryArtist;
+import com.zwb.geekology.parser.impl.util.GkParserStringUtils;
+import com.zwb.lazyload.ILoader;
+import com.zwb.lazyload.LazyLoader;
+import com.zwb.lazyload.Ptr;
 
 public class GkFsEntry implements IGkFsEntry
 {
     private File file;
+    private Ptr<String> artistNameSantized = new Ptr<String>();
+    private Ptr<String> releaseNameSantized = new Ptr<String>();
     
     public GkFsEntry(String path)
     {
@@ -97,7 +104,19 @@ public class GkFsEntry implements IGkFsEntry
     }
     
     public String toString()
-	{
-	    return "fsentry <"+this.getPath()+">: <artist="+this.getArtistName()+">/<release="+this.getReleaseName()+">";
-	}
+    {
+	return "fsentry <" + this.getPath() + ">: <artist=" + this.getArtistName() + ">/<release=" + this.getReleaseName() + ">";
+    }
+    
+    @Override
+    public String getArtistNameSantised()
+    {
+	return GkParserStringUtils.getGeneralArtistNameFilters().filter(this.getArtistName(), true);
+    }
+    
+    @Override
+    public String getReleaseNameSantised()
+    {
+	return GkParserStringUtils.getGeneralReleaseNameFilters(this.getArtistName()).filter(this.getReleaseName(), true);
+    }
 }

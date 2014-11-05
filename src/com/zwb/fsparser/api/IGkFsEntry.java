@@ -9,6 +9,8 @@ public interface IGkFsEntry extends Comparable<IGkFsEntry>
 	public String getFilename();
 	public File getFile();
 	public String getArtistName();
+	public String getArtistNameSantised();
 	public String getReleaseName();
+	public String getReleaseNameSantised();
 	public boolean isSampler();
 }
