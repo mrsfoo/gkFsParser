@@ -26,7 +26,7 @@ public class FsParserTest extends TestCase
 		for(int i=0; i<10; i++)
 		{
 			int depth = i;
-			List<File> files = Util.getFsLeaves(root, depth, true);
+			List<File> files = Util.getFsLeaves(root, depth, true, null);
 			List<String> filenames = Util.getFilenameList(files);
 			System.out.println("Leaves of <"+root+"> with depth <"+depth+">: SIZE==<"+filenames.size()+">");
 			for(String s: filenames)

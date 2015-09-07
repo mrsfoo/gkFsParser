@@ -1,9 +1,11 @@
 package com.zwb.fsparser.impl;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.zwb.fsparser.api.IGkFsEntry;
+import com.zwb.fsparser.api.IGkFsParserError;
 import com.zwb.fsparser.api.IGkFsParserSearchLocation;
 
 public class GkFsParserSearchLocation implements IGkFsParserSearchLocation
@@ -12,6 +14,7 @@ public class GkFsParserSearchLocation implements IGkFsParserSearchLocation
     private int depth;
     private List<IGkFsEntry> entries = new ArrayList<>();
     private String name;
+    List<IGkFsParserError> errors = new ArrayList<IGkFsParserError>();
     
     public GkFsParserSearchLocation(String name, String path, int depth)
     {
@@ -55,6 +58,17 @@ public class GkFsParserSearchLocation implements IGkFsParserSearchLocation
     public String getLocationName()
     {
 	return this.name;
+    }
+    
+    @Override
+    public List<IGkFsParserError> getErrors()
+    {
+	return errors;
+    }
+    
+    public void addErrorPath(File file, String reason)
+    {
+	this.errors.add(new GkFsParserError(file, reason));
     }
     
 }

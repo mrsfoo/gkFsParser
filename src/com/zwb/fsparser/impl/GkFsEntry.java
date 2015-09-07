@@ -74,6 +74,10 @@ public class GkFsEntry implements IGkFsEntry
     @Override
     public int compareTo(IGkFsEntry o)
     {
+	if(this.getArtistName().equals(o.getArtistName()))
+	{
+	    return this.getReleaseName().compareTo(o.getReleaseName());
+	}
 	return this.getArtistName().compareTo(o.getArtistName());
     }
     
